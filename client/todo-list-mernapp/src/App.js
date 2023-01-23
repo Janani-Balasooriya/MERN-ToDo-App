@@ -20,7 +20,6 @@ function App() {
   };
 
   //Create function to fetch all todoitems from database -- using useEffect hook
-
   return (
     <div className="App">
       <h1>Todo List</h1>
