@@ -4,6 +4,7 @@ import "./App.css";
 
 function App() {
   const [itemText, setItemText] = useState("");
+  const [listItems, setListItems] = useState([]);
 
   //add new todo item to database
   const addItem = async (e) => {
@@ -24,7 +25,7 @@ function App() {
     const getItemsList = async () => {
       try {
         const res = await axios.get("http://localhost:5500/api/items");
-        console.log(res.data);
+        setListItems(res.data);
       } catch (err) {
         console.log(err);
       }
@@ -47,21 +48,13 @@ function App() {
         <button type="submit">Add</button>
       </form>
       <div className="todo-listItems">
-        <div className="todo-item">
-          <p className="item-content">This is the item 1</p>
-          <button className="update-item">Update</button>
-          <button className="delete-item">Delete</button>
-        </div>
-        <div className="todo-item">
-          <p className="item-content">This is the item 2</p>
-          <button className="update-item">Update</button>
-          <button className="delete-item">Delete</button>
-        </div>
-        <div className="todo-item">
-          <p className="item-content">This is the item 3</p>
-          <button className="update-item">Update</button>
-          <button className="delete-item">Delete</button>
-        </div>
+        {listItems.map((item) => (
+          <div className="todo-item">
+            <p className="item-content">{item.item}</p>
+            <button className="update-item">Update</button>
+            <button className="delete-item">Delete</button>
+          </div>
+        ))}
       </div>
     </div>
   );
