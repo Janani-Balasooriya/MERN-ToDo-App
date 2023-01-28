@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.css";
 
@@ -20,6 +20,18 @@ function App() {
   };
 
   //Create function to fetch all todoitems from database -- using useEffect hook
+  useEffect(() => {
+    const getItemsList = async () => {
+      try {
+        const res = await axios.get("http://localhost:5500/api/items");
+        console.log(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    getItemsList();
+  }, []);
+
   return (
     <div className="App">
       <h1>Todo List</h1>
